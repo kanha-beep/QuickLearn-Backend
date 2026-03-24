@@ -10,5 +10,10 @@ export const ChapterSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Section"
     }],
-    subject_of_chapter: { type: mongoose.Schema.Types.ObjectId, ref: "Single_Subject" }
+    subject_of_chapter: { type: mongoose.Schema.Types.ObjectId, ref: "Single_Subject" },
+    class_of_chapter:{type:mongoose.Schema.Types.ObjectId, ref:"Class"},
+    order: {
+        type: Number,
+        default: 0
+    }
 });

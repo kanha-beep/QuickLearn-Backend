@@ -5,12 +5,18 @@ export const SingleSubjectSchema = new mongoose.Schema({
     subject_name: {
         type: String
     },
-    // embed chapter subdocuments so client can POST nested chapters directly
-    // chapters: [ChapterSchema]
     chapters: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Chapter"
         }
-    ]
+    ],
+    class_of_subject: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Class"
+    }, order: {
+        type: Number,
+        default: 0
+    }
+
 })

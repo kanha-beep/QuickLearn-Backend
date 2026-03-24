@@ -15,12 +15,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(express.static("public/uploads"));
 app.use(express.static("public/uploads/subjects"));
+import AuthRoutes from "./Routes/Auth.Routes.js";
+app.use("/api/auth", AuthRoutes)
+import ClassRoutes from "./Routes/Class.Routes.js";
+app.use("/api/class", ClassRoutes);
 import SubjectsRoutes from "./Routes/Subjects.Routes.js";
 app.use("/api/subjects", SubjectsRoutes);
 import ChaptersRoutes from "./Routes/Chapters.Routes.js";
 app.use("/api/subjects/:subjectId/chapters",ChaptersRoutes );
-import Single_SubjectsRoutes from "./Routes/SingleSubject.Routes.js";
-app.use("/api/subjects", Single_SubjectsRoutes );
+// import Single_SubjectsRoutes from "./Routes/SingleSubject.Routes.js";
+// app.use("/api/subjects", Single_SubjectsRoutes );
 import SectionsRoutes from "./Routes/Sections.Routes.js";
 app.use("/api/subjects", SectionsRoutes );
 connectDB()
