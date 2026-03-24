@@ -6,8 +6,9 @@ import dotenv from "dotenv";
 dotenv.config();
 const app = express();
 app.use(express.json());
+const allowedOrigin = process.env.CORS_ORIGIN.split(",")
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || "http://localhost:5173",
+    origin: allowedOrigin,
     credentials: true
 }));
 app.use(cookieParser());
@@ -22,11 +23,11 @@ app.use("/api/class", ClassRoutes);
 import SubjectsRoutes from "./Routes/Subjects.Routes.js";
 app.use("/api/subjects", SubjectsRoutes);
 import ChaptersRoutes from "./Routes/Chapters.Routes.js";
-app.use("/api/subjects/:subjectId/chapters",ChaptersRoutes );
+app.use("/api/subjects/:subjectId/chapters", ChaptersRoutes);
 // import Single_SubjectsRoutes from "./Routes/SingleSubject.Routes.js";
 // app.use("/api/subjects", Single_SubjectsRoutes );
 import SectionsRoutes from "./Routes/Sections.Routes.js";
-app.use("/api/subjects", SectionsRoutes );
+app.use("/api/subjects", SectionsRoutes);
 connectDB()
 app.use((error, req, res, next) => {
     const { status = 500, msg = "Something went wrong" } = error
