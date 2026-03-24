@@ -6,11 +6,31 @@ import dotenv from "dotenv";
 dotenv.config();
 const app = express();
 app.use(express.json());
-const allowedOrigin = process.env.CORS_ORIGIN.split(",")
-app.use(cors({
-    origin: allowedOrigin,
-    credentials: true
-}));
+const configuredOrigins = (process.env.CORS_ORIGIN || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        // Allow non-browser requests (curl/postman) and same-origin server calls.
+        if (!origin) return callback(null, true);
+
+        const isConfigured = configuredOrigins.includes(origin);
+        const isVercelPreview = /^https:\/\/([a-zA-Z0-9-]+\.)*vercel\.app$/.test(origin);
+
+        if (isConfigured || isVercelPreview) {
+            return callback(null, true);
+        }
+
+        return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
