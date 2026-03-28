@@ -8,41 +8,16 @@ const app = express();
 app.use(express.json());
 
 const configuredOrigins = (process.env.CORS_ORIGIN || "")
-  .split(",")
-  .map((origin) => origin.trim())
-  .filter(Boolean);
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
 
 console.log("urls: ", configuredOrigins);
 
-const corsOptions = {
-  origin(origin, callback) {
-    if (!origin) return callback(null, true);
-
-    const isConfigured = configuredOrigins.includes(origin);
-    const isVercelPreview = /^https:\/\/([a-zA-Z0-9-]+\.)*vercel\.app$/.test(origin);
-
-    if (isConfigured || isVercelPreview) {
-      return callback(null, true);
-    }
-
-    return callback(new Error(`CORS blocked for origin: ${origin}`));
-  },
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
-
-app.use(cors(corsOptions));
-app.use((req, res, next) => {
-  if (req.method === "OPTIONS") {
-    cors(corsOptions)(req, res, () => {
-      res.sendStatus(204);
-    });
-    return;
-  }
-
-  next();
-});
+app.use(cors({
+    origin: configuredOrigins,
+    credentials: true
+}))
 
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
