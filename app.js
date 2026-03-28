@@ -6,31 +6,44 @@ import dotenv from "dotenv";
 dotenv.config();
 const app = express();
 app.use(express.json());
+
 const configuredOrigins = (process.env.CORS_ORIGIN || "")
-    .split(",")
-    .map((origin) => origin.trim())
-    .filter(Boolean);
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+console.log("urls: ", configuredOrigins);
 
 const corsOptions = {
-    origin: (origin, callback) => {
-        // Allow non-browser requests (curl/postman) and same-origin server calls.
-        if (!origin) return callback(null, true);
+  origin(origin, callback) {
+    if (!origin) return callback(null, true);
 
-        const isConfigured = configuredOrigins.includes(origin);
-        const isVercelPreview = /^https:\/\/([a-zA-Z0-9-]+\.)*vercel\.app$/.test(origin);
+    const isConfigured = configuredOrigins.includes(origin);
+    const isVercelPreview = /^https:\/\/([a-zA-Z0-9-]+\.)*vercel\.app$/.test(origin);
 
-        if (isConfigured || isVercelPreview) {
-            return callback(null, true);
-        }
+    if (isConfigured || isVercelPreview) {
+      return callback(null, true);
+    }
 
-        return callback(new Error(`CORS blocked for origin: ${origin}`));
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    return callback(new Error(`CORS blocked for origin: ${origin}`));
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") {
+    cors(corsOptions)(req, res, () => {
+      res.sendStatus(204);
+    });
+    return;
+  }
+
+  next();
+});
+
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));

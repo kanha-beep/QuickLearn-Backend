@@ -6,21 +6,47 @@ import { Subjects } from "../Models/Subjects.Models.js";
 
 export const addChapters = async (req, res) => {
     const { subjectId} = req.params;
-    const { chapters, classId, order } = req.body;
+    const { chapters, classId } = req.body;
     const getSingleSubject = await Single_Subject.findById(subjectId);
     if (!getSingleSubject) return res.status(404).json({ msg: "Subject not found" });
-    // console.log("Chapters:", getSingleSubject);
-    const newChapter = await Chapters.create({
-        chapter_name: chapters[0],
-        subject_of_chapter: subjectId,
-        class_of_chapter: classId,
-        order: order
-    });
-    // console.log("new chapter: ", newChapter)
-    getSingleSubject.chapters.push(newChapter._id);
-    // console.log("chapters added in subject: ", getSingleSubject)
+
+    const normalizedChapters = (chapters || [])
+        .map((chapter, index) => {
+            if (typeof chapter === "string") {
+                return {
+                    chapter_name: chapter,
+                    order: index + 1,
+                };
+            }
+
+            return {
+                chapter_name: chapter?.chapter_name || "",
+                order: chapter?.order ?? index + 1,
+            };
+        })
+        .filter((chapter) => chapter.chapter_name);
+
+    if (normalizedChapters.length === 0) {
+        return res.status(400).json({ msg: "At least one valid chapter is required" });
+    }
+
+    const newChapters = await Chapters.insertMany(
+        normalizedChapters.map((chapter) => ({
+            chapter_name: chapter.chapter_name,
+            subject_of_chapter: subjectId,
+            class_of_chapter: classId,
+            order: chapter.order,
+        }))
+    );
+
+    getSingleSubject.chapters.push(...newChapters.map((chapter) => chapter._id));
     await getSingleSubject.save();
-    return res.status(201).json({ subject: getSingleSubject });
+
+    return res.status(201).json({
+        msg: "Chapters added successfully",
+        subject: getSingleSubject,
+        chapters: newChapters,
+    });
 }
 export const allChapters = async (req, res) => {
     // console.log("Subject id", req.params);

@@ -2,6 +2,36 @@ import { Sections } from "../Models/Section.Models.js";
 import { Chapters } from "../Models/Chapter.Models.js";
 import { Single_Subject } from "../Models/Single_Subject.Models.js";
 import { ExpressError } from "../Middlewares/ExpressError.js";
+
+const normalizeContentArray = (value) => {
+    if (Array.isArray(value)) {
+        return value.map((item) => String(item).trim()).filter(Boolean);
+    }
+
+    if (typeof value === "string") {
+        return value
+            .split(/\n|\./)
+            .map((item) => item.trim())
+            .filter(Boolean);
+    }
+
+    return [];
+};
+
+const normalizeSubsections = (subsections = []) => {
+    if (!Array.isArray(subsections)) return [];
+
+    return subsections
+        .map((subsection, index) => ({
+            subsection_name: subsection?.subsection_name || subsection?.title || "",
+            subsection_content: normalizeContentArray(
+                subsection?.subsection_content || subsection?.content || ""
+            ),
+            order: subsection?.order ?? index,
+        }))
+        .filter((subsection) => subsection.subsection_name && subsection.subsection_content.length > 0);
+};
+
 export const addSections = async (req, res, next) => {
     // console.log("req params: ", req.params);
     // console.log("req body: ", req.body);
@@ -11,14 +41,21 @@ export const addSections = async (req, res, next) => {
     const chapterId = req.params.chapterId;
     if (!subjectId || !chapterId) return next(new ExpressError(404, "Subject ID and Chapter ID are required"));
     // console.log("subjectId: ", subjectId, "chapterId: ", chapterId);
-    const { sectionName, sectionContent } = req.body
-    if (!sectionName || !sectionContent) return next(new ExpressError(400, "Section Name and Section Content are required"));
+    const { sectionName, sectionContent, subsections } = req.body
+    const normalizedSubsections = normalizeSubsections(subsections);
+    const sentencesArray = normalizedSubsections.length > 0
+        ? []
+        : normalizeContentArray(sectionContent);
+    if (!sectionName) return next(new ExpressError(400, "Section Name is required"));
+    if (!sentencesArray.length && !normalizedSubsections.length) {
+        return next(new ExpressError(400, "Add section content or at least one subsection"));
+    }
     // console.log("req body: ", req.body);
-    const sentencesArray = sectionContent.split(".").map(s => s.trim()).filter(s => s.length > 0);
     // console.log("sentences: ", sentencesArray);
     const newSection = await Sections.create({
         section_name: sectionName,
         section_content: sentencesArray,
+        subsections: normalizedSubsections,
         chapter_of_section: chapterId,
         subject_of_section: subjectId,
         order: order
@@ -66,14 +103,24 @@ export const singleSections = async (req, res) => {
 }
 export const editSingleSections = async (req, res) => {
     const { subjectId, chapterId, sectionId } = req.params;
-    const { sectionName, sectionContent , order} = req.body;
+    const { sectionName, sectionContent , order, subsections } = req.body;
     const section = await Sections.findOne({ _id: sectionId, chapter_of_section: chapterId, subject_of_section: subjectId });
     if (!section) {
         return res.status(404).json({ msg: "Section not found" });
     }
-    const sentencesArray = sectionContent.split("\n").map(s => s.trim()).filter(s => s.length > 0);
+    const normalizedSubsections = normalizeSubsections(subsections);
+    const sentencesArray = normalizedSubsections.length > 0
+        ? []
+        : normalizeContentArray(sectionContent);
+    if (!sectionName) {
+        return res.status(400).json({ msg: "Section Name is required" });
+    }
+    if (!sentencesArray.length && !normalizedSubsections.length) {
+        return res.status(400).json({ msg: "Add section content or at least one subsection" });
+    }
     section.section_name = sectionName;
     section.section_content = sentencesArray;
+    section.subsections = normalizedSubsections;
     section.order = order;
     await section.save();
     console.log("Updated section: ", section);
