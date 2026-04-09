@@ -10,7 +10,7 @@ export const VerifyAuth = (req, res, next) => {
         }
         // console.log("Token: ", token);
         const decoded = jwt.verify(token, process.env.JWT_SECRET || "study_key");
-        console.log("Decoded: ", decoded);
+        // console.log("Decoded: ", decoded);
         req.user = decoded; // decoded contains {email, _id}
         next();
     } catch (error) {

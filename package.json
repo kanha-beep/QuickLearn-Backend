@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "dev": "node --watch index.js",
+    "start": "node index.js",
+    "ai:start": "python -m uvicorn python_ai_service.app:app --host 127.0.0.1 --port 8000"
+  },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "bnpm": "^1.0.0",
