@@ -4,6 +4,7 @@ import { User } from "../Models/User.Models.js";
 import bcrypt from "bcrypt";
 
 const normalizeEmail = (email = "") => String(email).trim().toLowerCase();
+const LEGACY_ADMIN_EMAIL = "kanhashree2223@gmail.com";
 const sanitizeUser = (user) => ({
     id: user._id,
     email: user.email,
@@ -21,6 +22,8 @@ const getConfiguredAdmin = () => {
     return { email, password };
 };
 
+const isLegacyAdminEmail = (email = "") => normalizeEmail(email) === LEGACY_ADMIN_EMAIL;
+
 const buildAdminUser = (email) => ({
     _id: "admin",
     email,
@@ -36,7 +39,7 @@ export const Register = async (req, res, next) => {
     }
 
     const configuredAdmin = getConfiguredAdmin();
-    if (configuredAdmin?.email === normalizedEmail) {
+    if (configuredAdmin?.email === normalizedEmail || isLegacyAdminEmail(normalizedEmail)) {
         return next(new ExpressError(403, "Admin registration is disabled"));
     }
 
@@ -78,6 +81,16 @@ export const Login = async (req, res, next) => {
             token,
             roles: "admin",
             user: { id: "admin", email: normalizedEmail, roles: "admin" } 
+        });
+    }
+
+    if (isLegacyAdminEmail(normalizedEmail)) {
+        const token = GenToken(buildAdminUser(normalizedEmail));
+        return res.status(200).json({
+            msg: "Admin logged in successfully",
+            token,
+            roles: "admin",
+            user: { id: "admin", email: normalizedEmail, roles: "admin" }
         });
     }
 
