@@ -9,8 +9,8 @@ const router = express.Router()
 // router.post("/add-single-subjects", (req, res), WrapAsync(addSingleSubjects))
 //edit the name of single subject
 router.get("/:subjectId/chapters/:chapterId/sections",WrapAsync(allSections))
-router.post("/:subjectId/chapters/:chapterId/sections/add-section",  WrapAsync(addSections))
+router.post("/:subjectId/chapters/:chapterId/sections/add-section", VerifyAuth, IsRole("admin"), WrapAsync(addSections))
 router.get("/:subjectId/chapters/:chapterId/sections/:sectionId", WrapAsync(singleSections))
-router.patch("/:subjectId/chapters/:chapterId/sections/:sectionId/edit",  WrapAsync(editSingleSections))
-router.delete("/:subjectId/chapters/:chapterId/sections/:sectionId/delete", WrapAsync(deleteSingleSections))
+router.patch("/:subjectId/chapters/:chapterId/sections/:sectionId/edit", VerifyAuth, IsRole("admin"), WrapAsync(editSingleSections))
+router.delete("/:subjectId/chapters/:chapterId/sections/:sectionId/delete", VerifyAuth, IsRole("admin"), WrapAsync(deleteSingleSections))
 export default router

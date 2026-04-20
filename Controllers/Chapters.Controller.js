@@ -138,34 +138,55 @@ const findChapterProgress = (user, chapterId) => {
     );
 };
 
-export const addChapters = async (req, res) => {
+export const addChapters = async (req, res, next) => {
     const { subjectId} = req.params;
     const { chapters, classId } = req.body;
     const getSingleSubject = await Single_Subject.findById(subjectId);
-    if (!getSingleSubject) return res.status(404).json({ msg: "Subject not found" });
+    if (!getSingleSubject) return next(new ExpressError(404, "Subject not found"));
 
     const normalizedChapters = (chapters || [])
         .map((chapter, index) => {
             if (typeof chapter === "string") {
                 return {
-                    chapter_name: chapter,
+                    chapter_name: chapter.trim(),
                     order: index + 1,
                 };
             }
 
             return {
-                chapter_name: chapter?.chapter_name || "",
-                order: chapter?.order ?? index + 1,
+                chapter_name: String(chapter?.chapter_name || "").trim(),
+                order: Number(chapter?.order ?? index + 1),
             };
         })
         .filter((chapter) => chapter.chapter_name);
 
     if (normalizedChapters.length === 0) {
-        return res.status(400).json({ msg: "At least one valid chapter is required" });
+        return next(new ExpressError(400, "At least one valid chapter is required"));
+    }
+
+    const existingNames = new Set(
+        (
+            await Chapters.find({ subject_of_chapter: subjectId }).select("chapter_name").lean()
+        ).map((chapter) => String(chapter.chapter_name || "").trim().toLowerCase())
+    );
+    const payloadNames = new Set();
+    const chaptersToCreate = normalizedChapters.filter((chapter, index) => {
+        const normalizedName = chapter.chapter_name.toLowerCase();
+        if (existingNames.has(normalizedName) || payloadNames.has(normalizedName)) {
+            return false;
+        }
+
+        payloadNames.add(normalizedName);
+        chapter.order = Number.isNaN(chapter.order) ? index + 1 : chapter.order;
+        return true;
+    });
+
+    if (chaptersToCreate.length === 0) {
+        return next(new ExpressError(400, "All provided chapters already exist"));
     }
 
     const newChapters = await Chapters.insertMany(
-        normalizedChapters.map((chapter) => ({
+        chaptersToCreate.map((chapter) => ({
             chapter_name: chapter.chapter_name,
             subject_of_chapter: subjectId,
             class_of_chapter: classId,
@@ -187,6 +208,9 @@ export const allChapters = async (req, res) => {
     const { subjectId } = req.params;
     // console.log("Subject id",subjectId);
     const subjectName = await Single_Subject.findById(subjectId);
+    if (!subjectName) {
+        return res.status(404).json({ msg: "Subject not found" });
+    }
     // console.log("subject name: ", subjectName.subject_name);
     const chaptersList = await Chapters.find({ subject_of_chapter: subjectId }).sort({order:1});
     // console.log("chaptersList: ", chaptersList);
@@ -205,20 +229,24 @@ export const allChapters = async (req, res) => {
     });
     // console.log(getSingleSubject);
 }
-export const singleChapters = async (req, res) => {
+export const singleChapters = async (req, res, next) => {
     const { chapterId } = req.params;
     const chapter = await Chapters.findById(chapterId);
     if (!chapter) return next(new ExpressError(404, "Chapter not found"));
-    console.log("got the chapter in single chapter controller")
     return res.status(200).json({ chapter: chapter });
 }
 export const editChapters = async (req, res, next) => {
     const { chapterId } = req.params;
-    const { chapterName , order} = req.body;
+    const { chapterName } = req.body;
+    const order = Number(req.body.order);
     const chapterToUpdate = await Chapters.findById(chapterId);
     if (!chapterToUpdate) return next(new ExpressError(404, "Chapter not found"));
-    chapterToUpdate.chapter_name = chapterName || chapterToUpdate.chapter_name;
-    chapterToUpdate.order = order || chapterToUpdate.order;
+    if (chapterName !== undefined) {
+        chapterToUpdate.chapter_name = String(chapterName).trim() || chapterToUpdate.chapter_name;
+    }
+    if (!Number.isNaN(order)) {
+        chapterToUpdate.order = order;
+    }
     await chapterToUpdate.save();
     return res.status(200).json({ msg: "Chapter updated successfully", chapter: chapterToUpdate });
 }
@@ -381,5 +409,13 @@ export const deleteChapters = async (req, res, next) => {
     if (!chapterToDelete) return next(new ExpressError(404, "Chapter not found"));
     await Chapters.findByIdAndDelete(chapterId);
     await Sections.deleteMany({ chapter_of_section: chapterId });
+    await Single_Subject.findByIdAndUpdate(chapterToDelete.subject_of_chapter, {
+        $pull: { chapters: chapterToDelete._id },
+    });
+    await User.updateMany({}, {
+        $pull: {
+            chapterTestProgress: { chapterId: chapterToDelete._id },
+        },
+    });
     return res.status(200).json({ msg: "Chapter deleted successfully" });
 }

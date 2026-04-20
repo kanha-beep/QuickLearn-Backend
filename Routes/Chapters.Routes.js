@@ -6,10 +6,10 @@ import { VerifyAuth } from "../Middlewares/VerifyAuth.js"
 import { WrapAsync } from "../Middlewares/WrapAsync.js"
 const router = express.Router({ mergeParams: true })
 router.get("/",WrapAsync(allChapters))
-router.post("/add-chapters",  WrapAsync(addChapters))
+router.post("/add-chapters", VerifyAuth, IsRole("admin"), WrapAsync(addChapters))
 router.get("/:chapterId/test", VerifyAuth, WrapAsync(getChapterTest))
 router.post("/:chapterId/test/submit", VerifyAuth, WrapAsync(submitChapterTest))
 router.get("/:chapterId", WrapAsync(singleChapters))
-router.patch("/:chapterId/edit",  WrapAsync(editChapters))
-router.delete("/:chapterId/delete",  WrapAsync(deleteChapters))
+router.patch("/:chapterId/edit", VerifyAuth, IsRole("admin"), WrapAsync(editChapters))
+router.delete("/:chapterId/delete", VerifyAuth, IsRole("admin"), WrapAsync(deleteChapters))
 export default router

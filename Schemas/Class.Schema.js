@@ -7,8 +7,8 @@ export const ClassSchema = new mongoose.Schema({
         unique: true
     },
     subjects: [{
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: "Subject"
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Single_Subject"
     }],
     order: {
         type: Number,

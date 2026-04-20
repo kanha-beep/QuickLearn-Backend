@@ -1,9 +1,18 @@
 import jwt from 'jsonwebtoken';
 import { ExpressError } from './ExpressError.js';
 
+const extractToken = (req) => {
+    const authHeader = req.headers.authorization || req.headers.Authorization || "";
+    if (typeof authHeader === "string" && authHeader.startsWith("Bearer ")) {
+        return authHeader.slice(7).trim();
+    }
+
+    return req.cookies?.cookieToken || "";
+};
+
 export const VerifyAuth = (req, res, next) => {
     try {
-        const token = req.cookies.cookieToken;
+        const token = extractToken(req);
         
         if (!token) {
             return next(new ExpressError(401, "Access denied. No token provided."));
