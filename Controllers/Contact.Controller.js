@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import { ExpressError } from "../Middlewares/ExpressError.js";
+import { Contact } from "../Models/Contact.Models.js";
 
 const parseSecureFlag = (value = "") => String(value).trim().toLowerCase() === "true";
 
@@ -43,33 +44,55 @@ export const submitComplaint = async (req, res, next) => {
         return next(new ExpressError(400, "Name, email, subject, and complaint are required"));
     }
 
+    const complaint = await Contact.create({
+        name,
+        email: email.toLowerCase(),
+        subject,
+        message,
+        emailStatus: "pending",
+    });
+
     const { config, transporter } = buildTransporter();
 
-    await transporter.sendMail({
-        from: config.from,
-        to: config.to,
-        replyTo: email,
-        subject: `Study App Complaint: ${subject}`,
-        text: [
-            `Name: ${name}`,
-            `Email: ${email}`,
-            `Subject: ${subject}`,
-            "",
-            "Complaint:",
-            message,
-        ].join("\n"),
-        html: `
-            <div>
-                <p><strong>Name:</strong> ${name}</p>
-                <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Subject:</strong> ${subject}</p>
-                <p><strong>Complaint:</strong></p>
-                <p>${message.replace(/\n/g, "<br/>")}</p>
-            </div>
-        `,
-    });
+    try {
+        await transporter.sendMail({
+            from: config.from,
+            to: config.to,
+            replyTo: email,
+            subject: `Study App Complaint: ${subject}`,
+            text: [
+                `Complaint ID: ${complaint._id}`,
+                `Name: ${name}`,
+                `Email: ${email}`,
+                `Subject: ${subject}`,
+                "",
+                "Complaint:",
+                message,
+            ].join("\n"),
+            html: `
+                <div>
+                    <p><strong>Complaint ID:</strong> ${complaint._id}</p>
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Subject:</strong> ${subject}</p>
+                    <p><strong>Complaint:</strong></p>
+                    <p>${message.replace(/\n/g, "<br/>")}</p>
+                </div>
+            `,
+        });
+
+        complaint.emailStatus = "sent";
+        complaint.emailError = "";
+        await complaint.save();
+    } catch (error) {
+        complaint.emailStatus = "failed";
+        complaint.emailError = error?.message || "Mail delivery failed";
+        await complaint.save();
+        return next(new ExpressError(502, "Complaint saved, but email delivery failed"));
+    }
 
     return res.status(200).json({
         msg: "Complaint submitted successfully",
+        complaintId: complaint._id,
     });
 };
