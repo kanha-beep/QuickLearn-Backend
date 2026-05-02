@@ -36,6 +36,8 @@ import ChapterTestsRoutes from "./Routes/ChapterTests.Routes.js";
 app.use("/api/subjects/:subjectId/chapters/:chapterId/tests", ChapterTestsRoutes);
 import UserDashboardRoutes from "./Routes/UserDashboard.Routes.js";
 app.use("/api/me", UserDashboardRoutes);
+import ContactRoutes from "./Routes/Contact.Routes.js";
+app.use("/api/contact", ContactRoutes);
 // import Single_SubjectsRoutes from "./Routes/SingleSubject.Routes.js";
 // app.use("/api/subjects", Single_SubjectsRoutes );
 import SectionsRoutes from "./Routes/Sections.Routes.js";
