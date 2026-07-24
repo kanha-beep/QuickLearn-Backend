@@ -7,9 +7,21 @@ const normalizeEmail = (email = "") => String(email).trim().toLowerCase();
 const LEGACY_ADMIN_EMAIL = "kanhashree2223@gmail.com";
 const sanitizeUser = (user) => ({
     id: user._id,
+    fullName: user.fullName || "",
     email: user.email,
     roles: user.roles,
 });
+
+const getCookieOptions = () => ({
+    httpOnly: true,
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+    secure: process.env.NODE_ENV === "production",
+    maxAge: 24 * 60 * 60 * 1000,
+});
+
+const attachAuthCookie = (res, token) => {
+    res.cookie("cookieToken", token, getCookieOptions());
+};
 
 const getConfiguredAdmin = () => {
     const email = normalizeEmail(process.env.ADMIN_EMAIL || "");
@@ -31,7 +43,7 @@ const buildAdminUser = (email) => ({
 });
 
 export const Register = async (req, res, next) => {
-    const { email, password, confirmPassword } = req.body;
+    const { email, password, confirmPassword, name } = req.body;
     const normalizedEmail = normalizeEmail(email);
     if (!normalizedEmail || !password) return next(new ExpressError(400, "Email and password are required"));
     if (confirmPassword !== undefined && password !== confirmPassword) {
@@ -48,11 +60,13 @@ export const Register = async (req, res, next) => {
     const saltRounds = 12;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     const newUser = await User.create({
+        fullName: String(name || "").trim(),
         email: normalizedEmail,
         password: hashedPassword,
         roles: "user"
     });
     const token = GenToken(newUser);
+    attachAuthCookie(res, token);
     return res.status(201).json({
         msg: "User registered successfully",
         token,
@@ -62,6 +76,7 @@ export const Register = async (req, res, next) => {
 };
 
 export const Login = async (req, res, next) => {
+    console.log(req.body)
     const { email, password } = req.body;
     const normalizedEmail = normalizeEmail(email);
 
@@ -76,16 +91,7 @@ export const Login = async (req, res, next) => {
 
         const adminUser = buildAdminUser(normalizedEmail);
         const token = GenToken(adminUser);
-        return res.status(200).json({ 
-            msg: "Admin logged in successfully", 
-            token,
-            roles: "admin",
-            user: { id: "admin", email: normalizedEmail, roles: "admin" } 
-        });
-    }
-
-    if (isLegacyAdminEmail(normalizedEmail)) {
-        const token = GenToken(buildAdminUser(normalizedEmail));
+        attachAuthCookie(res, token);
         return res.status(200).json({
             msg: "Admin logged in successfully",
             token,
@@ -94,11 +100,24 @@ export const Login = async (req, res, next) => {
         });
     }
 
+    if (isLegacyAdminEmail(normalizedEmail)) {
+        const token = GenToken(buildAdminUser(normalizedEmail));
+        attachAuthCookie(res, token);
+        return res.status(200).json({
+            msg: "Admin logged in successfully",
+            token,
+            roles: "admin",
+            user: { id: "admin", email: normalizedEmail, roles: "admin" }
+        });
+    }
+    console.log("finding")
     const user = await User.findOne({ email: normalizedEmail });
     if (!user) return next(new ExpressError(400, "User does not exist"));
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return next(new ExpressError(400, "Invalid credentials"));
     const token = GenToken(user);
+    console.log(user)
+    attachAuthCookie(res, token);
     return res.status(200).json({
         msg: "User logged in successfully",
         token,
@@ -108,6 +127,10 @@ export const Login = async (req, res, next) => {
 };
 
 export const Logout = async (req, res, next) => {
+    res.clearCookie("cookieToken", {
+        ...getCookieOptions(),
+        maxAge: undefined,
+    });
     return res.status(200).json({
         msg: "User logged out successfully"
     });

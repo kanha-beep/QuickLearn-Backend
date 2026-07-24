@@ -4,7 +4,12 @@ import { ChapterTestSubmission } from "../Models/ChapterTestSubmission.Models.js
 import { Sections } from "../Models/Section.Models.js";
 import { Single_Subject } from "../Models/Single_Subject.Models.js";
 import { User } from "../Models/User.Models.js";
-import { generateChapterTestFromPrompt } from "../Services/ChapterTestAI.Service.js";
+import { CHAPTER_TEST_PROMPT_VERSION, generateChapterTestFromPrompt } from "../Services/ChapterTestAI.Service.js";
+import {
+    buildProgressReportCsv,
+    buildStudentLearningDashboard,
+    buildTeacherAnalyticsDashboard,
+} from "../Services/LearningInsights.Service.js";
 import { retrieveRelevantPyqContext } from "../Services/PyqCorpus.Service.js";
 import { evaluateChapterTest } from "../Utils/EvaluateChapterTest.js";
 
@@ -192,10 +197,13 @@ export const generateChapterTest = async (req, res) => {
                 sections,
                 pyqContext,
                 recentTests,
-            })
+            }),
+            {
+                promptVersion: CHAPTER_TEST_PROMPT_VERSION,
+            }
         );
 
-        const sanitizedQuestions = (generated?.questions || [])
+        const sanitizedQuestions = (generated?.data?.questions || [])
             .map((question, index) => sanitizeQuestion(question, sections, index))
             .filter(Boolean);
 
@@ -218,19 +226,29 @@ export const generateChapterTest = async (req, res) => {
             createdBy: req.user?._id && req.user._id !== "admin" ? req.user._id : null,
             chapterId,
             subjectId,
-            title: generated?.title || `${chapter.chapter_name} Test`,
-            description: generated?.description || `AI-generated test for ${chapter.chapter_name}`,
-            durationMinutes: generated?.durationMinutes || Math.max(10, questions.length * 2),
+            title: generated?.data?.title || `${chapter.chapter_name} Test`,
+            description: generated?.data?.description || `AI-generated test for ${chapter.chapter_name}`,
+            durationMinutes: generated?.data?.durationMinutes || Math.max(10, questions.length * 2),
             totalMarks: questions.length,
             instructions:
-                generated?.instructions?.length
-                    ? generated.instructions
+                generated?.data?.instructions?.length
+                    ? generated.data.instructions
                     : [
                         "Each question has one correct answer.",
                         "Use chapter summaries and subsection summaries to solve the paper.",
                         "Review the AI notes after submission to strengthen weak topics.",
                     ],
             questions,
+            generationMeta: {
+                promptVersion: generated.meta.promptVersion,
+                promptHash: generated.meta.promptHash,
+                source: "ai",
+                retryCount: generated.meta.retryCount,
+                timeoutMs: generated.meta.timeoutMs,
+                requestId: generated.meta.requestId,
+                promptLength: generated.meta.promptLength,
+                generatedAt: generated.meta.generatedAt,
+            },
         });
 
         return res.status(201).json({
@@ -331,10 +349,25 @@ export const submitChapterTestAttempt = async (req, res) => {
         const user = await User.findById(req.user._id);
         if (user) {
             const progress = getChapterProgress(user, chapterId);
+            const totalQuestions = Math.max(
+                evaluation.summary.correct +
+                evaluation.summary.incorrect +
+                evaluation.summary.skipped +
+                evaluation.summary.review,
+                1
+            );
+            const accuracy = evaluation.score / totalQuestions;
+            const reviewStageDays = accuracy >= 0.85 ? 7 : accuracy >= 0.7 ? 4 : accuracy >= 0.5 ? 2 : 1;
+            const masteryScore = Math.round(Math.min(100, accuracy * 100));
             if (progress) {
                 progress.wrongSectionIds = evaluation.wrongSectionIds;
                 progress.wrongSubsectionIds = evaluation.wrongSubsectionIds;
                 progress.lastSubmittedAt = new Date();
+                progress.attemptsCount = Number(progress.attemptsCount || 0) + 1;
+                progress.lastScore = evaluation.score;
+                progress.bestScore = Math.max(Number(progress.bestScore || 0), evaluation.score);
+                progress.masteryScore = masteryScore;
+                progress.nextReviewAt = new Date(Date.now() + reviewStageDays * 24 * 60 * 60 * 1000);
             } else {
                 user.chapterTestProgress.push({
                     chapterId,
@@ -342,6 +375,11 @@ export const submitChapterTestAttempt = async (req, res) => {
                     wrongSubsectionIds: evaluation.wrongSubsectionIds,
                     generatedQuestions: [],
                     lastSubmittedAt: new Date(),
+                    attemptsCount: 1,
+                    lastScore: evaluation.score,
+                    bestScore: evaluation.score,
+                    masteryScore,
+                    nextReviewAt: new Date(Date.now() + reviewStageDays * 24 * 60 * 60 * 1000),
                 });
             }
             await user.save();
@@ -537,4 +575,30 @@ export const getUserChapterTestDashboard = async (req, res) => {
                 : null,
         })),
     });
+};
+
+export const getStudentLearningDashboard = async (req, res) => {
+    if (!req.user?._id || req.user._id === "admin") {
+        return res.status(403).json({ message: "Student dashboard is only available for student accounts" });
+    }
+
+    const dashboard = await buildStudentLearningDashboard(req.user._id);
+    return res.json(dashboard);
+};
+
+export const getTeacherAnalyticsDashboard = async (req, res) => {
+    const dashboard = await buildTeacherAnalyticsDashboard();
+    return res.json(dashboard);
+};
+
+export const downloadProgressReport = async (req, res) => {
+    const isAdmin = req.user?._id === "admin" || req.user?.roles === "admin";
+    const csv = await buildProgressReportCsv({
+        userId: req.user?._id,
+        isAdmin,
+    });
+    const fileName = isAdmin ? "teacher-analytics-report.csv" : "student-progress-report.csv";
+    res.setHeader("Content-Type", "text/csv; charset=utf-8");
+    res.setHeader("Content-Disposition", `attachment; filename="${fileName}"`);
+    return res.status(200).send(csv);
 };

@@ -10,7 +10,7 @@ const normalizeContentArray = (value) => {
 
     if (typeof value === "string") {
         return value
-            .split(/\n|\./)
+            .split(/\r?\n/)
             .map((item) => item.trim())
             .filter(Boolean);
     }
@@ -18,18 +18,34 @@ const normalizeContentArray = (value) => {
     return [];
 };
 
+const sortByNumericOrder = (items = []) =>
+    [...items].sort((left, right) => {
+        const leftOrder = Number(left?.order ?? Number.MAX_SAFE_INTEGER);
+        const rightOrder = Number(right?.order ?? Number.MAX_SAFE_INTEGER);
+
+        if (leftOrder !== rightOrder) {
+            return leftOrder - rightOrder;
+        }
+
+        return String(left?.subsection_name || left?.section_name || "").localeCompare(
+            String(right?.subsection_name || right?.section_name || "")
+        );
+    });
+
 const normalizeSubsections = (subsections = []) => {
     if (!Array.isArray(subsections)) return [];
 
-    return subsections
+    return sortByNumericOrder(
+        subsections
         .map((subsection, index) => ({
             subsection_name: subsection?.subsection_name || subsection?.title || "",
             subsection_content: normalizeContentArray(
                 subsection?.subsection_content || subsection?.content || ""
             ),
-            order: subsection?.order ?? index,
+            order: subsection?.order ?? index + 1,
         }))
-        .filter((subsection) => subsection.subsection_name && subsection.subsection_content.length > 0);
+        .filter((subsection) => subsection.subsection_name && subsection.subsection_content.length > 0)
+    );
 };
 
 export const addSections = async (req, res, next) => {
@@ -70,7 +86,10 @@ export const allSections = async (req, res) => {
     const getSections = await Sections.find({ chapter_of_section: chapterId, subject_of_section: subjectId }).sort({ order: 1 });
     return res.status(200).json({
         msg: "All sections fetched successfully",
-        sections: getSections
+        sections: getSections.map((section) => ({
+            ...section.toObject(),
+            subsections: sortByNumericOrder(section.subsections || []),
+        }))
     })
 }
 export const singleSections = async (req, res) => {
@@ -81,7 +100,10 @@ export const singleSections = async (req, res) => {
     }
     return res.status(200).json({
         msg: "Section fetched successfully",
-        section: section
+        section: {
+            ...section.toObject(),
+            subsections: sortByNumericOrder(section.subsections || []),
+        }
     });
 }
 export const editSingleSections = async (req, res) => {
@@ -111,7 +133,10 @@ export const editSingleSections = async (req, res) => {
     await section.save();
     return res.status(200).json({
         msg: "Section updated successfully",
-        section: section
+        section: {
+            ...section.toObject(),
+            subsections: sortByNumericOrder(section.subsections || []),
+        }
     });
 }
 export const deleteSingleSections = async (req, res) => {

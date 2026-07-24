@@ -70,6 +70,16 @@ const chapterTestSchema = new mongoose.Schema(
         totalMarks: { type: Number, required: true },
         instructions: { type: [String], default: [] },
         questions: { type: [questionSchema], default: [] },
+        generationMeta: {
+            promptVersion: { type: String, default: "" },
+            promptHash: { type: String, default: "" },
+            source: { type: String, default: "ai" },
+            retryCount: { type: Number, default: 0 },
+            timeoutMs: { type: Number, default: 0 },
+            requestId: { type: String, default: "" },
+            promptLength: { type: Number, default: 0 },
+            generatedAt: { type: Date, default: null },
+        },
     },
     { timestamps: true }
 );

@@ -1,10 +1,13 @@
 import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
+import helmet from "helmet";
+import { rateLimit } from "express-rate-limit";
 import { connectDB } from "./init/db.js"
 import dotenv from "dotenv";
 dotenv.config();
 const app = express();
+app.set("trust proxy", 1);
 app.use(express.json());
 
 const configuredOrigins = (process.env.CORS_ORIGIN || "")
@@ -12,11 +15,28 @@ const configuredOrigins = (process.env.CORS_ORIGIN || "")
     .map((origin) => origin.trim())
     .filter(Boolean);
 
-console.log("urls: ", configuredOrigins);
-
 app.use(cors({
-    origin: configuredOrigins,
+    origin(origin, callback) {
+        if (!origin) {
+            return callback(null, true);
+        }
+
+        if (configuredOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+
+        return callback(new Error("Origin not allowed by CORS"));
+    },
     credentials: true
+}))
+app.use(helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+}));
+app.use(rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: Number(process.env.RATE_LIMIT_MAX || 300),
+    standardHeaders: true,
+    legacyHeaders: false,
 }))
 
 app.use(cookieParser());

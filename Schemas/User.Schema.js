@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 export const UserSchema = new mongoose.Schema({
+    fullName: {
+        type: String,
+        default: ""
+    },
     email: {
         type: String,
         required: true,
@@ -61,6 +65,26 @@ export const UserSchema = new mongoose.Schema({
             }
         }],
         lastSubmittedAt: {
+            type: Date,
+            default: null
+        },
+        attemptsCount: {
+            type: Number,
+            default: 0
+        },
+        lastScore: {
+            type: Number,
+            default: 0
+        },
+        bestScore: {
+            type: Number,
+            default: 0
+        },
+        masteryScore: {
+            type: Number,
+            default: 0
+        },
+        nextReviewAt: {
             type: Date,
             default: null
         }
