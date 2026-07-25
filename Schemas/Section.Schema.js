@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 export const SectionSchema = new mongoose.Schema({
     section_name: { type: String, required: true },
     section_content: [{ type: String, default: "" }],
+    keywords: [{ type: String, default: "" }],
     subsections: [{
         subsection_name: { type: String, required: true },
         subsection_content: [{ type: String, default: "" }],
