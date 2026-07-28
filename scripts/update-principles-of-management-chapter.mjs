@@ -14,8 +14,7 @@ const chapterName = "Principles of Management";
 const rows = [
   {
     order: 1,
-    sectionName: "First",
-    subsectionName: "Principles of Management",
+    sectionName: "Principles of Management",
     explanation: [
       "1. Broad and general guidelines",
       "2. Guide decision-making and behaviour",
@@ -26,8 +25,7 @@ const rows = [
   },
   {
     order: 2,
-    sectionName: "Second",
-    subsectionName: "Nature of Principles of Management",
+    sectionName: "Nature of Principles of Management",
     explanation: [
       "1. Universal applicability",
       "2. General guidelines",
@@ -40,8 +38,7 @@ const rows = [
   },
   {
     order: 3,
-    sectionName: "Third",
-    subsectionName: "Significance of Principles of Management",
+    sectionName: "Significance of Principles of Management",
     explanation: [
       "1. Provide useful insights into reality",
       "2. Optimum utilisation of resources and effective administration",
@@ -53,8 +50,7 @@ const rows = [
   },
   {
     order: 4,
-    sectionName: "Fourth",
-    subsectionName: "Taylor's Scientific Management",
+    sectionName: "Taylor's Scientific Management",
     explanation: [
       "1. Father of Scientific Management",
       "2. Scientific study of work",
@@ -66,8 +62,7 @@ const rows = [
   },
   {
     order: 5,
-    sectionName: "Fifth",
-    subsectionName: "Principles of Scientific Management",
+    sectionName: "Principles of Scientific Management",
     explanation: [
       "1. Science not Rule of Thumb",
       "2. Harmony not Discord",
@@ -78,8 +73,7 @@ const rows = [
   },
   {
     order: 6,
-    sectionName: "Sixth",
-    subsectionName: "Science not Rule of Thumb",
+    sectionName: "Science not Rule of Thumb",
     explanation: [
       "1. Scientific inquiry",
       "2. Replaces traditional methods",
@@ -90,8 +84,7 @@ const rows = [
   },
   {
     order: 7,
-    sectionName: "Seventh",
-    subsectionName: "Harmony not Discord",
+    sectionName: "Harmony not Discord",
     explanation: [
       "1. Complete harmony between management and workers",
       "2. No class conflict",
@@ -102,8 +95,7 @@ const rows = [
   },
   {
     order: 8,
-    sectionName: "Eighth",
-    subsectionName: "Cooperation not Individualism",
+    sectionName: "Cooperation not Individualism",
     explanation: [
       "1. Complete cooperation between labour and management",
       "2. Reward constructive suggestions",
@@ -114,8 +106,7 @@ const rows = [
   },
   {
     order: 9,
-    sectionName: "Ninth",
-    subsectionName: "Maximum not Restricted Output",
+    sectionName: "Maximum not Restricted Output",
     explanation: [
       "1. Maximum production",
       "2. Avoid restricted output",
@@ -126,8 +117,7 @@ const rows = [
   },
   {
     order: 10,
-    sectionName: "Tenth",
-    subsectionName: "Development of Each and Every Person to Greatest Efficiency and Prosperity",
+    sectionName: "Development of Each and Every Person to Greatest Efficiency and Prosperity",
     explanation: [
       "1. Scientific selection of workers",
       "2. Proper training",
@@ -138,8 +128,7 @@ const rows = [
   },
   {
     order: 11,
-    sectionName: "Eleventh",
-    subsectionName: "Techniques of Scientific Management",
+    sectionName: "Techniques of Scientific Management",
     explanation: [
       "1. Functional foremanship",
       "2. Standardisation and simplification of work",
@@ -152,8 +141,7 @@ const rows = [
   },
   {
     order: 12,
-    sectionName: "Twelfth",
-    subsectionName: "Functional Foremanship",
+    sectionName: "Functional Foremanship",
     explanation: [
       "1. Separation of planning and execution",
       "2. Eight specialists",
@@ -164,8 +152,7 @@ const rows = [
   },
   {
     order: 13,
-    sectionName: "Thirteenth",
-    subsectionName: "Standardisation and Simplification of Work",
+    sectionName: "Standardisation and Simplification of Work",
     explanation: [
       "1. Standard methods",
       "2. Standard tools",
@@ -176,8 +163,7 @@ const rows = [
   },
   {
     order: 14,
-    sectionName: "Fourteenth",
-    subsectionName: "Method Study",
+    sectionName: "Method Study",
     explanation: [
       "1. One best way of doing a job",
       "2. Analysis of production process",
@@ -188,8 +174,7 @@ const rows = [
   },
   {
     order: 15,
-    sectionName: "Fifteenth",
-    subsectionName: "Motion Study",
+    sectionName: "Motion Study",
     explanation: [
       "1. Study of movements",
       "2. Elimination of unnecessary motions",
@@ -201,8 +186,7 @@ const rows = [
   },
   {
     order: 16,
-    sectionName: "Sixteenth",
-    subsectionName: "Time Study",
+    sectionName: "Time Study",
     explanation: [
       "1. Standard time for a job",
       "2. Time measuring devices",
@@ -213,8 +197,7 @@ const rows = [
   },
   {
     order: 17,
-    sectionName: "Seventeenth",
-    subsectionName: "Fatigue Study",
+    sectionName: "Fatigue Study",
     explanation: [
       "1. Study of physical and mental tiredness",
       "2. Need for rest intervals",
@@ -225,8 +208,7 @@ const rows = [
   },
   {
     order: 18,
-    sectionName: "Eighteenth",
-    subsectionName: "Differential Piece Wage System",
+    sectionName: "Differential Piece Wage System",
     explanation: [
       "1. Different wage rates",
       "2. Reward efficient workers",
@@ -237,8 +219,7 @@ const rows = [
   },
   {
     order: 19,
-    sectionName: "Nineteenth",
-    subsectionName: "Mental Revolution",
+    sectionName: "Mental Revolution",
     explanation: [
       "1. Change in attitude of workers and management",
       "2. From competition to cooperation",
@@ -249,8 +230,7 @@ const rows = [
   },
   {
     order: 20,
-    sectionName: "Twentieth",
-    subsectionName: "Fayol's Principles of Management",
+    sectionName: "Fayol's Principles of Management",
     explanation: [
       "1. Administrative theory",
       "2. Father of General Management",
@@ -261,8 +241,7 @@ const rows = [
   },
   {
     order: 21,
-    sectionName: "Twenty-First",
-    subsectionName: "Division of Work",
+    sectionName: "Division of Work",
     explanation: [
       "1. Small tasks",
       "2. Specialisation",
@@ -273,8 +252,7 @@ const rows = [
   },
   {
     order: 22,
-    sectionName: "Twenty-Second",
-    subsectionName: "Authority and Responsibility",
+    sectionName: "Authority and Responsibility",
     explanation: [
       "1. Right to give orders",
       "2. Responsibility as corollary of authority",
@@ -285,8 +263,7 @@ const rows = [
   },
   {
     order: 23,
-    sectionName: "Twenty-Third",
-    subsectionName: "Discipline",
+    sectionName: "Discipline",
     explanation: [
       "1. Obedience to rules and agreements",
       "2. Good superiors",
@@ -297,8 +274,7 @@ const rows = [
   },
   {
     order: 24,
-    sectionName: "Twenty-Fourth",
-    subsectionName: "Unity of Command",
+    sectionName: "Unity of Command",
     explanation: [
       "1. One employee one boss",
       "2. Avoid dual subordination",
@@ -309,8 +285,7 @@ const rows = [
   },
   {
     order: 25,
-    sectionName: "Twenty-Fifth",
-    subsectionName: "Unity of Direction",
+    sectionName: "Unity of Direction",
     explanation: [
       "1. One head",
       "2. One plan",
@@ -321,8 +296,7 @@ const rows = [
   },
   {
     order: 26,
-    sectionName: "Twenty-Sixth",
-    subsectionName: "Subordination of Individual Interest to General Interest",
+    sectionName: "Subordination of Individual Interest to General Interest",
     explanation: [
       "1. Organisational interest above individual interest",
       "2. Common good",
@@ -333,8 +307,7 @@ const rows = [
   },
   {
     order: 27,
-    sectionName: "Twenty-Seventh",
-    subsectionName: "Remuneration of Employees",
+    sectionName: "Remuneration of Employees",
     explanation: [
       "1. Fair wages",
       "2. Reasonable standard of living",
@@ -345,8 +318,7 @@ const rows = [
   },
   {
     order: 28,
-    sectionName: "Twenty-Eighth",
-    subsectionName: "Centralisation and Decentralisation",
+    sectionName: "Centralisation and Decentralisation",
     explanation: [
       "1. Concentration of authority",
       "2. Dispersal of authority",
@@ -357,8 +329,7 @@ const rows = [
   },
   {
     order: 29,
-    sectionName: "Twenty-Ninth",
-    subsectionName: "Scalar Chain",
+    sectionName: "Scalar Chain",
     explanation: [
       "1. Chain of authority",
       "2. Formal lines of communication",
@@ -369,8 +340,7 @@ const rows = [
   },
   {
     order: 30,
-    sectionName: "Thirtieth",
-    subsectionName: "Order",
+    sectionName: "Order",
     explanation: [
       "1. Right place for everything and everyone",
       "2. Orderliness",
@@ -381,8 +351,7 @@ const rows = [
   },
   {
     order: 31,
-    sectionName: "Thirty-First",
-    subsectionName: "Equity",
+    sectionName: "Equity",
     explanation: [
       "1. Kindliness and justice",
       "2. Fair treatment",
@@ -393,8 +362,7 @@ const rows = [
   },
   {
     order: 32,
-    sectionName: "Thirty-Second",
-    subsectionName: "Stability of Personnel",
+    sectionName: "Stability of Personnel",
     explanation: [
       "1. Minimise employee turnover",
       "2. Stability of tenure",
@@ -405,8 +373,7 @@ const rows = [
   },
   {
     order: 33,
-    sectionName: "Thirty-Third",
-    subsectionName: "Initiative",
+    sectionName: "Initiative",
     explanation: [
       "1. Taking first step",
       "2. Self-motivation",
@@ -417,8 +384,7 @@ const rows = [
   },
   {
     order: 34,
-    sectionName: "Thirty-Fourth",
-    subsectionName: "Esprit De Corps",
+    sectionName: "Esprit De Corps",
     explanation: [
       "1. Team spirit",
       "2. Unity and harmony",
@@ -429,8 +395,7 @@ const rows = [
   },
   {
     order: 35,
-    sectionName: "Thirty-Fifth",
-    subsectionName: "Fayol Versus Taylor - A Comparison",
+    sectionName: "Fayol Versus Taylor - A Comparison",
     explanation: [
       "1. Fayol focused on top management",
       "2. Taylor focused on shop floor",
@@ -442,6 +407,11 @@ const rows = [
     ],
   },
 ];
+
+const toKeywords = (explanation = []) =>
+  explanation
+    .map((item) => String(item).replace(/^\d+\.\s*/, "").trim())
+    .filter(Boolean);
 
 await mongoose.connect(process.env.MONGO_URL, { serverSelectionTimeoutMS: 10000 });
 
@@ -472,14 +442,9 @@ if (existingSections.length > 0) {
 const createdSections = await Sections.insertMany(
   rows.map((row) => ({
     section_name: row.sectionName,
-    section_content: [],
-    subsections: [
-      {
-        subsection_name: row.subsectionName,
-        subsection_content: row.explanation,
-        order: 1,
-      },
-    ],
+    section_content: row.explanation,
+    keywords: toKeywords(row.explanation),
+    subsections: [],
     order: row.order,
     chapter_of_section: chapterId,
     subject_of_section: subjectId,
