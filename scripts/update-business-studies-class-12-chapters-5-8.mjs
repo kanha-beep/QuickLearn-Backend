@@ -628,32 +628,132 @@ const chaptersToSync = [
         order: 1,
         sectionName: "Meaning of Controlling",
         explanation: [
-          "1. Controlling means ensuring that activities in an organisation are performed as per the plans.",
-          "2. It ensures that organisational resources are used effectively and efficiently for the achievement of predetermined goals.",
-          "3. Controlling is a goal-oriented and pervasive managerial function.",
-          "4. It completes one cycle of management process and improves planning in the next cycle.",
+          "1. Controlling means ensuring that organisational activities are performed according to plans.",
+          "2. It checks whether resources are being used effectively and efficiently to achieve predetermined goals.",
+          "3. It is a goal-oriented and pervasive function performed at all levels of management.",
+          "4. It brings the management cycle back to planning by finding deviations and improving future plans.",
         ],
       },
       {
         order: 2,
         sectionName: "Importance of Controlling",
         explanation: [
-          "1. Accomplishing organisational goals",
-          "2. Judging accuracy of standards",
-          "3. Making efficient use of resources",
-          "4. Improving employee motivation",
-          "5. Ensuring order and discipline",
-          "6. Facilitating coordination in action",
+          "1. Control is an indispensable function of management.",
+          "2. A good control system helps the organisation stay on track and improve performance.",
+        ],
+        keywords: [
+          "Accomplishing organisational goals",
+          "Judging accuracy of standards",
+          "Making efficient use of resources",
+          "Improving employee motivation",
+          "Ensuring order and discipline",
+          "Facilitating coordination in action",
+        ],
+        subsections: [
+          {
+            subsection_name: "Accomplishing organisational goals",
+            subsection_content: [
+              "1. Controlling measures progress towards organisational goals.",
+              "2. It reveals deviations and points to corrective action.",
+              "3. It keeps the organisation on the right track.",
+            ],
+            order: 1,
+          },
+          {
+            subsection_name: "Judging accuracy of standards",
+            subsection_content: [
+              "1. A good control system checks whether standards are accurate and objective.",
+              "2. It tracks internal and external changes affecting performance.",
+              "3. It helps management review and revise standards when needed.",
+            ],
+            order: 2,
+          },
+          {
+            subsection_name: "Making efficient use of resources",
+            subsection_content: [
+              "1. Control reduces wastage and spoilage of resources.",
+              "2. Activities are performed according to predetermined standards and norms.",
+              "3. This improves effectiveness and efficiency.",
+            ],
+            order: 3,
+          },
+          {
+            subsection_name: "Improving employee motivation",
+            subsection_content: [
+              "1. Employees know in advance what they are expected to do.",
+              "2. They also know the standards on which their performance will be judged.",
+              "3. This motivates them to perform better.",
+            ],
+            order: 4,
+          },
+          {
+            subsection_name: "Ensuring order and discipline",
+            subsection_content: [
+              "1. Controlling creates an atmosphere of order and discipline in the organisation.",
+              "2. It keeps a close check on activities and reduces dishonest behaviour.",
+              "3. It supports proper conduct at work.",
+            ],
+            order: 5,
+          },
+          {
+            subsection_name: "Facilitating coordination in action",
+            subsection_content: [
+              "1. Controlling gives direction to activities and efforts across the organisation.",
+              "2. Departments and employees work according to coordinated standards.",
+              "3. This helps achieve overall organisational objectives.",
+            ],
+            order: 6,
+          },
         ],
       },
       {
         order: 3,
         sectionName: "Limitations of Controlling",
         explanation: [
-          "1. Difficulty in setting quantitative standards",
-          "2. Little control on external factors",
-          "3. Resistance from employees",
-          "4. Costly affair",
+          "1. Controlling is important, but it has practical limits.",
+          "2. Its effectiveness depends on the nature of standards, people, and operating conditions.",
+        ],
+        keywords: [
+          "Difficulty in setting quantitative standards",
+          "Little control on external factors",
+          "Resistance from employees",
+          "Costly affair",
+        ],
+        subsections: [
+          {
+            subsection_name: "Difficulty in setting quantitative standards",
+            subsection_content: [
+              "1. Control becomes weaker when standards cannot be expressed in numbers.",
+              "2. Areas like morale, job satisfaction, and human behaviour are hard to measure.",
+              "3. This makes comparison with actual performance difficult.",
+            ],
+            order: 1,
+          },
+          {
+            subsection_name: "Little control on external factors",
+            subsection_content: [
+              "1. An enterprise cannot fully control factors outside the organisation.",
+              "2. Government policy, technology, and competition may affect results.",
+            ],
+            order: 2,
+          },
+          {
+            subsection_name: "Resistance from employees",
+            subsection_content: [
+              "1. Employees may see control as a restriction on their freedom.",
+              "2. They may resist close monitoring such as strict surveillance.",
+            ],
+            order: 3,
+          },
+          {
+            subsection_name: "Costly affair",
+            subsection_content: [
+              "1. A control system needs expenditure, time, and effort.",
+              "2. Small enterprises may not be able to afford expensive controls.",
+              "3. Costs should not exceed the benefits derived.",
+            ],
+            order: 4,
+          },
         ],
       },
       {
@@ -661,102 +761,79 @@ const chaptersToSync = [
         sectionName: "Relationship between Planning and Controlling",
         explanation: [
           "1. Planning and controlling are inseparable twins of management.",
-          "2. Planning provides the standards of performance that serve as the basis of controlling.",
-          "3. Planning without controlling is meaningless and controlling without planning is blind.",
-          "4. Planning is prescriptive whereas controlling is evaluative.",
-          "5. Both planning and controlling are backward-looking as well as forward-looking functions.",
+          "2. Planning provides standards, and controlling checks whether actual performance matches them.",
+          "3. Planning without controlling is meaningless, and controlling without planning is blind.",
+          "4. Planning is prescriptive, while controlling is evaluative.",
+          "5. Both use past experience and both help improve future performance.",
         ],
       },
       {
         order: 5,
         sectionName: "Controlling Process",
         explanation: [
-          "1. Setting performance standards",
-          "2. Measurement of actual performance",
-          "3. Comparison of actual performance with standards",
-          "4. Analysing deviations",
-          "5. Taking corrective action",
+          "1. Controlling is a systematic process.",
+          "2. It follows five connected steps from standard setting to corrective action.",
+        ],
+        keywords: [
+          "Setting Performance Standards",
+          "Measurement of Actual Performance",
+          "Comparing Actual Performance with Standards",
+          "Analysing Deviations",
+          "Taking Corrective Action",
+        ],
+        subsections: [
+          {
+            subsection_name: "Setting Performance Standards",
+            subsection_content: [
+              "1. Standards are the criteria against which actual performance is measured.",
+              "2. They may be quantitative or qualitative.",
+              "3. Standards should be set as precisely as possible.",
+              "4. They should remain flexible enough to be revised when conditions change.",
+            ],
+            order: 1,
+          },
+          {
+            subsection_name: "Measurement of Actual Performance",
+            subsection_content: [
+              "1. Actual performance should be measured objectively and reliably.",
+              "2. It may be measured through observation, sample checking, reports, or ratios.",
+              "3. As far as possible, performance should be measured in the same units as the standards.",
+              "4. Where possible, measurement should be done during performance, not only after completion.",
+            ],
+            order: 2,
+          },
+          {
+            subsection_name: "Comparing Actual Performance with Standards",
+            subsection_content: [
+              "1. Actual performance is compared with the set standards.",
+              "2. This comparison shows the deviation between actual and desired results.",
+              "3. Comparison is easier when standards are in quantitative terms.",
+            ],
+            order: 3,
+          },
+          {
+            subsection_name: "Analysing Deviations",
+            subsection_content: [
+              "1. Some deviation is normal, so the acceptable range of deviation must be fixed.",
+              "2. Deviations in key areas require quicker attention than those in minor areas.",
+              "3. Critical Point Control focuses on key result areas that are vital to success.",
+              "4. Management by Exception brings only significant deviations beyond the permissible limit to management.",
+            ],
+            order: 4,
+          },
+          {
+            subsection_name: "Taking Corrective Action",
+            subsection_content: [
+              "1. Corrective action is taken when deviations go beyond acceptable limits.",
+              "2. It may include training employees, adding resources, or changing work arrangements.",
+              "3. If the deviation cannot be corrected through action, standards may need revision.",
+            ],
+            order: 5,
+          },
         ],
       },
       {
         order: 6,
-        sectionName: "Setting Performance Standards",
-        explanation: [
-          "1. Standards are the criteria against which actual performance is measured.",
-          "2. Standards can be set in quantitative as well as qualitative terms.",
-          "3. Standards should be flexible enough to be modified whenever required.",
-        ],
-      },
-      {
-        order: 7,
-        sectionName: "Measurement of Actual Performance",
-        explanation: [
-          "1. Actual performance should be measured in an objective and reliable manner.",
-          "2. Measurement can be done through personal observation, sample checking, and performance reports.",
-          "3. As far as possible, performance should be measured in the same units in which standards are set.",
-        ],
-      },
-      {
-        order: 8,
-        sectionName: "Comparison of Actual Performance with Standards",
-        explanation: [
-          "1. This step involves comparison of actual performance with the standard.",
-          "2. Such comparison reveals deviations between actual and desired results.",
-          "3. Comparison becomes easier when standards are set in quantitative terms.",
-        ],
-      },
-      {
-        order: 9,
-        sectionName: "Analysing Deviations",
-        explanation: [
-          "1. Some deviation in performance can be expected in all activities.",
-          "2. It is important to determine the acceptable range of deviations.",
-          "3. Deviations in key areas of business need urgent managerial attention.",
-          "4. Critical point control",
-          "5. Management by exception",
-        ],
-      },
-      {
-        order: 10,
-        sectionName: "Taking Corrective Action",
-        explanation: [
-          "1. Corrective action is required when deviations go beyond acceptable limits.",
-          "2. It may involve training employees, assigning additional resources, or revising standards.",
-          "3. The aim is to ensure that deviations do not recur and standards are accomplished.",
-        ],
-      },
-      {
-        order: 11,
-        sectionName: "Techniques of Managerial Control",
-        explanation: [
-          "1. Traditional techniques",
-          "2. Modern techniques",
-        ],
-      },
-      {
-        order: 12,
-        sectionName: "Traditional Techniques",
-        explanation: [
-          "1. Personal observation",
-          "2. Statistical reports",
-          "3. Breakeven analysis",
-          "4. Budgetary control",
-        ],
-      },
-      {
-        order: 13,
-        sectionName: "Modern Techniques",
-        explanation: [
-          "1. Return on investment",
-          "2. Ratio analysis",
-          "3. Responsibility accounting",
-          "4. Management audit",
-          "5. PERT and CPM",
-          "6. Management Information System",
-        ],
-      },
-      {
-        order: 14,
         sectionName: "Key Terms",
         explanation: [
           "1. Controlling",
@@ -773,22 +850,61 @@ const chaptersToSync = [
         ],
       },
       {
-        order: 15,
+        order: 7,
         sectionName: "Summary",
-        explanation: [],
+        explanation: [
+          "1. Controlling ensures that actual activities conform to planned activities.",
+          "2. It helps in achieving goals, judging standards, using resources efficiently, improving morale, ensuring discipline, and coordinating action.",
+          "3. Controlling has limits such as difficulty in setting quantitative standards, weak control over external factors, employee resistance, and cost.",
+          "4. The process of control includes setting standards, measuring performance, comparing results, analysing deviations, and taking corrective action.",
+          "5. Planning and controlling are inseparable because plans provide the basis of control and control improves future plans.",
+          "6. Traditional techniques of control include personal observation, statistical reports, breakeven analysis, and budgetary control.",
+          "7. Modern techniques include return on investment, ratio analysis, responsibility accounting, management audit, PERT and CPM, and Management Information System.",
+        ],
       },
       {
-        order: 16,
+        order: 8,
         sectionName: "Exercises",
         explanation: [],
-      },
-      {
-        order: 17,
-        sectionName: "Top 3 Sample Questions",
-        explanation: [
-          "1. What is controlling? Explain its importance.",
-          "2. Explain the relationship between planning and controlling.",
-          "3. Explain the steps in the controlling process.",
+        keywords: [
+          "Very Short Answer Type",
+          "Short Answer Type",
+          "Long Answer Type",
+        ],
+        subsections: [
+          {
+            subsection_name: "Very Short Answer Type",
+            subsection_content: [
+              "1. State the meaning of controlling.",
+              "2. Name the principle used for dealing with deviations effectively and state one case where control loses effectiveness.",
+              "3. State one situation in which an organisation's control system loses its effectiveness.",
+              "4. Give any two standards for evaluating the performance of the Finance & Accounting department.",
+              "5. Name the term used for the difference between standard performance and actual performance.",
+            ],
+            order: 1,
+          },
+          {
+            subsection_name: "Short Answer Type",
+            subsection_content: [
+              "1. 'Planning is looking ahead and controlling is looking back.' Comment.",
+              "2. 'An effort to control everything may end up in controlling nothing.' Explain.",
+              "3. Explain how management audit serves as an effective technique of controlling.",
+              "4. In the Writewell Products Ltd. case, explain the principle of management control MsVasundhara should use while taking her decision.",
+            ],
+            order: 2,
+          },
+          {
+            subsection_name: "Long Answer Type",
+            subsection_content: [
+              "1. Explain the various steps involved in the process of control.",
+              "2. Explain the techniques of managerial control.",
+              "3. Explain the importance of controlling in an organisation and the problems in implementing an effective control system.",
+              "4. Discuss the relationship between planning and controlling.",
+              "5. In the 'M' limited case, explain the benefits of a good control system, the link between planning and control, and the steps in the control process.",
+              "6. In Mr Shantanu's case, describe any two features of controlling and explain any four points of its importance.",
+            ],
+            order: 3,
+          },
         ],
       },
     ],
