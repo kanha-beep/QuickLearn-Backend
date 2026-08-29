@@ -14,17 +14,19 @@ const configuredOrigins = (process.env.CORS_ORIGIN || "")
     .split(",")
     .map((origin) => origin.trim())
     .filter(Boolean);
-
+console.log("urls: ", configuredOrigins)
+console.log("cors starts")
 app.use(cors({
     origin(origin, callback) {
+        console.log("1.")
         if (!origin) {
             return callback(null, true);
         }
-
+        console.log("2.")
         if (configuredOrigins.includes(origin)) {
             return callback(null, true);
         }
-
+        console.log("3.")
         return callback(new Error("Origin not allowed by CORS"));
     },
     credentials: true

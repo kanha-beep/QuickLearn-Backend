@@ -39,13 +39,58 @@ const rows = [
   {
     order: 3,
     sectionName: "Significance of Principles of Management",
-    explanation: [
-      "1. Provide useful insights into reality",
-      "2. Optimum utilisation of resources and effective administration",
-      "3. Scientific decisions",
-      "4. Meeting changing environment requirements",
-      "5. Fulfilling social responsibility",
-      "6. Management training, education and research",
+    explanation: [],
+    keywords: [
+      "Providing managers with useful insights into reality",
+      "Optimum utilisation of resources and effective administration",
+      "Scientific decisions",
+      "Meeting changing environment requirements",
+      "Fulfilling social responsibility",
+      "Management training, education and research",
+    ],
+    subsections: [
+      {
+        subsection_name: "Providing managers with useful insights into reality",
+        subsection_content: [
+          "Management principles help managers understand real business situations better. They improve knowledge, judgement, and help solve recurring problems quickly by learning from past mistakes.",
+        ],
+        order: 1,
+      },
+      {
+        subsection_name: "Optimum utilisation of resources and effective administration",
+        subsection_content: [
+          "These principles help managers use human and material resources in the best possible way. They reduce waste and support fair administration by limiting personal bias in decisions.",
+        ],
+        order: 2,
+      },
+      {
+        subsection_name: "Scientific decisions",
+        subsection_content: [
+          "Management principles help managers take decisions based on facts, logic, and careful thinking. This makes decisions more objective, realistic, timely, and measurable.",
+        ],
+        order: 3,
+      },
+      {
+        subsection_name: "Meeting changing environment requirements",
+        subsection_content: [
+          "Management principles are flexible, so managers can adapt them to changing business conditions. They help organisations respond to trends like specialisation, outsourcing, and focus on core activities.",
+        ],
+        order: 4,
+      },
+      {
+        subsection_name: "Fulfilling social responsibility",
+        subsection_content: [
+          "These principles guide businesses to act responsibly toward society. They now include fairness, customer value, environmental care, and proper dealings with stakeholders.",
+        ],
+        order: 5,
+      },
+      {
+        subsection_name: "Management training, education and research",
+        subsection_content: [
+          "Management principles form the base for management studies, training, and research. They also help develop new techniques and strengthen management as a discipline.",
+        ],
+        order: 6,
+      },
     ],
   },
   {
@@ -63,12 +108,106 @@ const rows = [
   {
     order: 5,
     sectionName: "Principles of Scientific Management",
-    explanation: [
-      "1. Science not Rule of Thumb",
-      "2. Harmony not Discord",
-      "3. Cooperation not Individualism",
-      "4. Maximum not Restricted Output",
-      "5. Development of each and every person to greatest efficiency and prosperity",
+    explanation: [],
+    keywords: [
+      "Science not Rule of Thumb",
+      "Harmony, Not Discord",
+      "Cooperation, Not Individualism",
+      "Maximum, not Restricted Output",
+      "Development of Each and Every Person to His or Her Greatest Efficiency and Prosperity",
+      "Functional foremanship",
+      "Standardisation and simplification of work",
+      "Method study",
+      "Motion study",
+      "Time study",
+      "Fatigue study",
+      "Differential piece wage system",
+    ],
+    subsections: [
+      {
+        subsection_name: "Science not Rule of Thumb",
+        subsection_content: [
+          "Taylor said work should be done through scientific study and analysis, not by guesswork or old methods. The best method should be identified, standardised, and used throughout the organisation.",
+        ],
+        order: 1,
+      },
+      {
+        subsection_name: "Harmony, Not Discord",
+        subsection_content: [
+          "Taylor believed there should be peace and mutual understanding between workers and management. Both sides should see that their interests are connected and work together without conflict.",
+        ],
+        order: 2,
+      },
+      {
+        subsection_name: "Cooperation, Not Individualism",
+        subsection_content: [
+          "Taylor wanted full cooperation between labour and management instead of selfish individual action. Management should listen to workers, reward good suggestions, and involve them in important matters.",
+        ],
+        order: 3,
+      },
+      {
+        subsection_name: "Maximum, not Restricted Output",
+        subsection_content: [
+          "Taylor emphasised maximum production instead of deliberately limiting output. Higher output increases efficiency and benefits both workers and the company.",
+        ],
+        order: 4,
+      },
+      {
+        subsection_name: "Development of Each and Every Person to His or Her Greatest Efficiency and Prosperity",
+        subsection_content: [
+          "Taylor stressed scientific selection, proper training, and suitable job assignment. When workers are developed according to their abilities, both efficiency and prosperity increase.",
+        ],
+        order: 5,
+      },
+      {
+        subsection_name: "Functional foremanship",
+        subsection_content: [
+          "Taylor said one foreman cannot manage all planning, supervision, and control work alone. So he divided the foreman's job among eight specialists, each handling a separate planning or production duty for better efficiency.",
+        ],
+        order: 6,
+      },
+      {
+        subsection_name: "Standardisation and simplification of work",
+        subsection_content: [
+          "Taylor supported setting standards for methods, tools, quality, and performance. He also wanted unnecessary varieties and designs removed so work becomes simpler, cheaper, and less wasteful.",
+        ],
+        order: 7,
+      },
+      {
+        subsection_name: "Method study",
+        subsection_content: [
+          "Method study means finding the one best way to do a job. It examines each stage of the production process to choose the most efficient sequence and reduce cost while improving quality.",
+        ],
+        order: 8,
+      },
+      {
+        subsection_name: "Motion study",
+        subsection_content: [
+          "Motion study examines the movements used while doing a job and removes useless ones. This saves time and energy and helps workers complete work more efficiently.",
+        ],
+        order: 9,
+      },
+      {
+        subsection_name: "Time study",
+        subsection_content: [
+          "Time study fixes the standard time needed for a well-defined task by taking repeated measurements. It helps decide standard output, labour requirement, incentive plans, and labour cost.",
+        ],
+        order: 10,
+      },
+      {
+        subsection_name: "Fatigue study",
+        subsection_content: [
+          "Fatigue study looks at when and why workers become physically or mentally tired during work. It helps decide proper rest intervals and remove causes of tiredness so productivity can stay high.",
+        ],
+        order: 11,
+      },
+      {
+        subsection_name: "Differential piece wage system",
+        subsection_content: [
+          "Taylor proposed different wage rates for efficient and inefficient workers based on standard output. Workers who meet or exceed the standard get a higher rate, which rewards efficiency and motivates better performance.",
+        ],
+        order: 12,
+      },
     ],
   },
   {
@@ -128,97 +267,6 @@ const rows = [
   },
   {
     order: 11,
-    sectionName: "Techniques of Scientific Management",
-    explanation: [
-      "1. Functional foremanship",
-      "2. Standardisation and simplification of work",
-      "3. Method study",
-      "4. Motion study",
-      "5. Time study",
-      "6. Fatigue study",
-      "7. Differential piece wage system",
-    ],
-  },
-  {
-    order: 12,
-    sectionName: "Functional Foremanship",
-    explanation: [
-      "1. Separation of planning and execution",
-      "2. Eight specialists",
-      "3. Planning incharge",
-      "4. Production incharge",
-      "5. Specialisation at shop floor",
-    ],
-  },
-  {
-    order: 13,
-    sectionName: "Standardisation and Simplification of Work",
-    explanation: [
-      "1. Standard methods",
-      "2. Standard tools",
-      "3. Standards of quality and performance",
-      "4. Elimination of unnecessary variety",
-      "5. Reduction in cost and waste",
-    ],
-  },
-  {
-    order: 14,
-    sectionName: "Method Study",
-    explanation: [
-      "1. One best way of doing a job",
-      "2. Analysis of production process",
-      "3. Better sequence of operations",
-      "4. Efficient use of men, machines and materials",
-      "5. Minimisation of cost and maximisation of quality",
-    ],
-  },
-  {
-    order: 15,
-    sectionName: "Motion Study",
-    explanation: [
-      "1. Study of movements",
-      "2. Elimination of unnecessary motions",
-      "3. Productive motions",
-      "4. Incidental motions",
-      "5. Unproductive motions",
-      "6. Increased productivity",
-    ],
-  },
-  {
-    order: 16,
-    sectionName: "Time Study",
-    explanation: [
-      "1. Standard time for a job",
-      "2. Time measuring devices",
-      "3. Fixing standard task",
-      "4. Determining number of workers",
-      "5. Incentive schemes and labour cost",
-    ],
-  },
-  {
-    order: 17,
-    sectionName: "Fatigue Study",
-    explanation: [
-      "1. Study of physical and mental tiredness",
-      "2. Need for rest intervals",
-      "3. Regaining stamina",
-      "4. Improving productivity",
-      "5. Removal of causes of fatigue",
-    ],
-  },
-  {
-    order: 18,
-    sectionName: "Differential Piece Wage System",
-    explanation: [
-      "1. Different wage rates",
-      "2. Reward efficient workers",
-      "3. Lower rate for inefficient workers",
-      "4. Based on standard output",
-      "5. Motivation for better performance",
-    ],
-  },
-  {
-    order: 19,
     sectionName: "Mental Revolution",
     explanation: [
       "1. Change in attitude of workers and management",
@@ -229,172 +277,128 @@ const rows = [
     ],
   },
   {
-    order: 20,
+    order: 12,
     sectionName: "Fayol's Principles of Management",
-    explanation: [
-      "1. Administrative theory",
-      "2. Father of General Management",
-      "3. Top level management perspective",
-      "4. Fourteen principles of management",
-      "5. General and Industrial Management",
+    explanation: [],
+    keywords: [
+      "Division of Work",
+      "Authority and Responsibility",
+      "Discipline",
+      "Unity of Command",
+      "Unity of Direction",
+      "Subordination of Individual Interest to General Interest",
+      "Remuneration of Employees",
+      "Centralisation and Decentralisation",
+      "Scalar Chain",
+      "Order",
+      "Equity",
+      "Stability of Personnel",
+      "Initative",
+      "Esprit De Corps",
+    ],
+    subsections: [
+      {
+        subsection_name: "Division of Work",
+        subsection_content: [
+          "Work should be divided into small and specialised jobs. When trained people do specific tasks, work becomes more efficient and the organisation can achieve better output.",
+        ],
+        order: 1,
+      },
+      {
+        subsection_name: "Authority and Responsibility",
+        subsection_content: [
+          "A manager must have the right to give orders and enough power to carry out assigned duties. Authority and responsibility should stay balanced so work can be done properly without misuse of power.",
+        ],
+        order: 2,
+      },
+      {
+        subsection_name: "Discipline",
+        subsection_content: [
+          "Discipline means obeying rules and honouring agreements necessary for the organisation to function well. It depends on fair agreements, good superiors, and proper use of penalties when needed.",
+        ],
+        order: 3,
+      },
+      {
+        subsection_name: "Unity of Command",
+        subsection_content: [
+          "Each employee should get orders from only one superior. If a person receives instructions from more than one boss, confusion and conflict arise, and work suffers.",
+        ],
+        order: 4,
+      },
+      {
+        subsection_name: "Unity of Direction",
+        subsection_content: [
+          "Activities with the same objective should have one head and one plan. This keeps efforts coordinated and prevents overlap between different units or divisions.",
+        ],
+        order: 5,
+      },
+      {
+        subsection_name: "Subordination of Individual Interest to General Interest",
+        subsection_content: [
+          "The interest of the organisation should come before the interest of any one employee or small group. Managers and workers should avoid personal gain that harms the larger good of the company and stakeholders.",
+        ],
+        order: 6,
+      },
+      {
+        subsection_name: "Remuneration of Employees",
+        subsection_content: [
+          "Employees should receive fair and reasonable pay, and the organisation should also be able to afford it. Just and equitable remuneration helps create good relations and smooth working.",
+        ],
+        order: 7,
+      },
+      {
+        subsection_name: "Centralisation and Decentralisation",
+        subsection_content: [
+          "Centralisation means decision-making power is concentrated, while decentralisation means it is shared among more people. A good organisation should maintain a proper balance based on its size and situation.",
+        ],
+        order: 8,
+      },
+      {
+        subsection_name: "Scalar Chain",
+        subsection_content: [
+          "There should be a clear line of authority and communication from top to bottom. In normal situations this chain should be followed, but in emergencies a shorter route can be used to avoid delay.",
+        ],
+        order: 9,
+      },
+      {
+        subsection_name: "Order",
+        subsection_content: [
+          "People and materials should be kept in the right place at the right time. Proper order avoids confusion and helps the organisation work with greater efficiency and productivity.",
+        ],
+        order: 10,
+      },
+      {
+        subsection_name: "Equity",
+        subsection_content: [
+          "Managers should treat all employees fairly, kindly, and justly. Equal treatment builds loyalty and devotion, and there should be no discrimination on any basis.",
+        ],
+        order: 11,
+      },
+      {
+        subsection_name: "Stability of Personnel",
+        subsection_content: [
+          "Employees should not be changed too frequently because stability improves efficiency. Keeping people in their positions for a reasonable time reduces insecurity and saves recruitment and training costs.",
+        ],
+        order: 12,
+      },
+      {
+        subsection_name: "Initative",
+        subsection_content: [
+          "Workers should be encouraged to think, suggest improvements, and take the first step in useful work. Good organisations support such self-motivated action and reward ideas that save time or cost.",
+        ],
+        order: 13,
+      },
+      {
+        subsection_name: "Esprit De Corps",
+        subsection_content: [
+          "Management should build team spirit, unity, and harmony among employees. A strong feeling of togetherness improves coordination, trust, and commitment in the organisation.",
+        ],
+        order: 14,
+      },
     ],
   },
   {
-    order: 21,
-    sectionName: "Division of Work",
-    explanation: [
-      "1. Small tasks",
-      "2. Specialisation",
-      "3. More and better work",
-      "4. Efficient use of human effort",
-      "5. Trained specialist",
-    ],
-  },
-  {
-    order: 22,
-    sectionName: "Authority and Responsibility",
-    explanation: [
-      "1. Right to give orders",
-      "2. Responsibility as corollary of authority",
-      "3. Balance between authority and responsibility",
-      "4. Formal and informal authority",
-      "5. Safeguards against misuse of power",
-    ],
-  },
-  {
-    order: 23,
-    sectionName: "Discipline",
-    explanation: [
-      "1. Obedience to rules and agreements",
-      "2. Good superiors",
-      "3. Clear and fair agreements",
-      "4. Judicious application of penalties",
-      "5. Commitment by management and workers",
-    ],
-  },
-  {
-    order: 24,
-    sectionName: "Unity of Command",
-    explanation: [
-      "1. One employee one boss",
-      "2. Avoid dual subordination",
-      "3. Clear responsibility",
-      "4. Prevent confusion",
-      "5. Maintain authority and discipline",
-    ],
-  },
-  {
-    order: 25,
-    sectionName: "Unity of Direction",
-    explanation: [
-      "1. One head",
-      "2. One plan",
-      "3. Same objective",
-      "4. Coordinated efforts",
-      "5. Unity of action",
-    ],
-  },
-  {
-    order: 26,
-    sectionName: "Subordination of Individual Interest to General Interest",
-    explanation: [
-      "1. Organisational interest above individual interest",
-      "2. Common good",
-      "3. Larger interests of stakeholders",
-      "4. Selflessness",
-      "5. Example by managers",
-    ],
-  },
-  {
-    order: 27,
-    sectionName: "Remuneration of Employees",
-    explanation: [
-      "1. Fair wages",
-      "2. Reasonable standard of living",
-      "3. Within paying capacity of company",
-      "4. Just and equitable remuneration",
-      "5. Good relations and smooth working",
-    ],
-  },
-  {
-    order: 28,
-    sectionName: "Centralisation and Decentralisation",
-    explanation: [
-      "1. Concentration of authority",
-      "2. Dispersal of authority",
-      "3. Balance between the two",
-      "4. Depends on circumstances",
-      "5. Large organisations have more decentralisation",
-    ],
-  },
-  {
-    order: 29,
-    sectionName: "Scalar Chain",
-    explanation: [
-      "1. Chain of authority",
-      "2. Formal lines of communication",
-      "3. Top to bottom hierarchy",
-      "4. Gang plank in emergency",
-      "5. Avoid delay in communication",
-    ],
-  },
-  {
-    order: 30,
-    sectionName: "Order",
-    explanation: [
-      "1. Right place for everything and everyone",
-      "2. Orderliness",
-      "3. Suitable place and time",
-      "4. Maximum efficiency",
-      "5. Increased productivity",
-    ],
-  },
-  {
-    order: 31,
-    sectionName: "Equity",
-    explanation: [
-      "1. Kindliness and justice",
-      "2. Fair treatment",
-      "3. No discrimination",
-      "4. Loyalty and devotion",
-      "5. Equality in the eyes of management",
-    ],
-  },
-  {
-    order: 32,
-    sectionName: "Stability of Personnel",
-    explanation: [
-      "1. Minimise employee turnover",
-      "2. Stability of tenure",
-      "3. Time to show results",
-      "4. Reduced insecurity",
-      "5. Better organisational efficiency",
-    ],
-  },
-  {
-    order: 33,
-    sectionName: "Initiative",
-    explanation: [
-      "1. Taking first step",
-      "2. Self-motivation",
-      "3. Thinking and executing plans",
-      "4. Employee suggestion system",
-      "5. Reward improvement ideas",
-    ],
-  },
-  {
-    order: 34,
-    sectionName: "Esprit De Corps",
-    explanation: [
-      "1. Team spirit",
-      "2. Unity and harmony",
-      "3. Replace I with We",
-      "4. Mutual trust and belongingness",
-      "5. Better coordination",
-    ],
-  },
-  {
-    order: 35,
+    order: 13,
     sectionName: "Fayol Versus Taylor - A Comparison",
     explanation: [
       "1. Fayol focused on top management",
@@ -443,8 +447,8 @@ const createdSections = await Sections.insertMany(
   rows.map((row) => ({
     section_name: row.sectionName,
     section_content: row.explanation,
-    keywords: toKeywords(row.explanation),
-    subsections: [],
+    keywords: Array.isArray(row.keywords) ? row.keywords : toKeywords(row.explanation),
+    subsections: Array.isArray(row.subsections) ? row.subsections : [],
     order: row.order,
     chapter_of_section: chapterId,
     subject_of_section: subjectId,

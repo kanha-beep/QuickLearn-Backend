@@ -12,11 +12,11 @@ const classId = "6a635ca828870dc644b63dc1";
 
 const chapterConfig = {
   order: 2,
-  chapterName: "National Income",
+  chapterName: "National income",
   rows: [
     {
       order: 1,
-      sectionName: "2.1 SOME BASIC CONCEPTS OF MACROECONOMICS",
+      sectionName: "Some basic concepts of macroeconomics",
       explanation: [
         "1. Economic wealth depends on how resources are used in production, not only on the amount of resources a country owns.",
         "2. Production in a modern economy happens through goods and services made by many enterprises.",
@@ -35,7 +35,7 @@ const chapterConfig = {
     },
     {
       order: 2,
-      sectionName: "2.2 CIRCULAR FLOW OF INCOME AND METHODS OF CALCULATING NATIONAL INCOME",
+      sectionName: "Circular flow of income and methods of calculating national income",
       explanation: [
         "1. In a simple economy, firms pay households for factor services and households spend their income on goods and services produced by firms.",
         "2. Income moves between households and firms in a circular way through the product market and factor market.",
@@ -43,14 +43,14 @@ const chapterConfig = {
         "4. Even when the economy becomes more complex, these three methods give the same annual value of national income.",
       ],
       keywords: [
-        "2.2.1 The Product or Value Added Method",
-        "2.2.2 Expenditure Method",
-        "2.2.3 Income Method",
-        "2.2.4 Factor Cost, Basic Prices and Market Prices",
+        "The product or value added method",
+        "Expenditure method",
+        "Income method",
+        "Factor cost, basic prices and market prices",
       ],
       subsections: [
         {
-          subsection_name: "2.2.1 The Product or Value Added Method",
+          subsection_name: "The product or value added method",
           subsection_content: [
             "1. This method measures national income by adding the value added by each producing unit in the economy.",
             "2. Value added means value of output minus value of intermediate goods used in production.",
@@ -60,7 +60,7 @@ const chapterConfig = {
           order: 1,
         },
         {
-          subsection_name: "2.2.2 Expenditure Method",
+          subsection_name: "Expenditure method",
           subsection_content: [
             "1. This method measures national income by adding final expenditure on goods and services.",
             "2. It includes household consumption, investment expenditure, government spending and net exports.",
@@ -70,7 +70,7 @@ const chapterConfig = {
           order: 2,
         },
         {
-          subsection_name: "2.2.3 Income Method",
+          subsection_name: "Income method",
           subsection_content: [
             "1. This method adds all factor incomes earned in the production process.",
             "2. The main factor incomes are wages, rent, interest and profit.",
@@ -80,7 +80,7 @@ const chapterConfig = {
           order: 3,
         },
         {
-          subsection_name: "2.2.4 Factor Cost, Basic Prices and Market Prices",
+          subsection_name: "Factor cost, basic prices and market prices",
           subsection_content: [
             "1. National income measures can be expressed at factor cost, basic prices or market prices.",
             "2. Factor cost shows payments made to the factors of production.",
@@ -93,24 +93,86 @@ const chapterConfig = {
     },
     {
       order: 3,
-      sectionName: "2.3 SOME MACROECONOMIC IDENTITIES",
+      sectionName: "Some macroeconomic identities",
       explanation: [
-        "1. GDP measures the value of final goods and services produced within the domestic territory during a year.",
-        "2. GNP is GDP plus net factor income from abroad.",
-        "3. Net factor income from abroad is factor income earned by domestic factors abroad minus factor income earned by foreign factors in the domestic economy.",
-        "4. NNP is GNP minus depreciation.",
-        "5. National Income is NNP at market prices minus net indirect taxes.",
-        "6. Personal Income is obtained after adjusting National Income for undistributed profits, corporate tax, net interest payments and transfer payments.",
-        "7. Personal Disposable Income is Personal Income minus personal tax payments and non-tax payments.",
-        "8. Personal Disposable Income is the part of income that households can use for consumption or saving.",
-        "9. The chapter also introduces National Disposable Income and Private Income as related aggregate measures.",
+        "1. This section explains the main macroeconomic identities used to move from one income measure to another.",
+        "2. It shows how output, national product, depreciation, taxes and personal income measures are linked.",
       ],
-      keywords: [],
-      subsections: [],
+      keywords: [
+        "Gross Domestic Product",
+        "Gross National Product",
+        "Net National Product",
+        "National Income",
+        "Personal Income",
+        "Personal Disposable Income",
+        "National Disposable Income and Private Income",
+      ],
+      subsections: [
+        {
+          subsection_name: "Gross Domestic Product",
+          subsection_content: [
+            "1. GDP measures the value of final goods and services produced within the domestic territory during a year.",
+            "2. It focuses on production taking place inside the country, no matter who owns the factors of production.",
+          ],
+          order: 1,
+        },
+        {
+          subsection_name: "Gross National Product",
+          subsection_content: [
+            "1. GNP is GDP plus net factor income from abroad.",
+            "2. Net factor income from abroad means factor income earned by domestic factors abroad minus factor income earned by foreign factors in the domestic economy.",
+            "3. GNP includes production-related income belonging to the country's residents.",
+          ],
+          order: 2,
+        },
+        {
+          subsection_name: "Net National Product",
+          subsection_content: [
+            "1. NNP is GNP minus depreciation.",
+            "2. Depreciation is deducted because part of capital gets used up through wear and tear during production.",
+          ],
+          order: 3,
+        },
+        {
+          subsection_name: "National Income",
+          subsection_content: [
+            "1. National Income is NNP at market prices minus net indirect taxes.",
+            "2. Net indirect taxes are indirect taxes minus subsidies.",
+            "3. This gives NNP at factor cost, which shows income actually accruing to factors of production.",
+          ],
+          order: 4,
+        },
+        {
+          subsection_name: "Personal Income",
+          subsection_content: [
+            "1. Personal Income is obtained after adjusting National Income for items that do not directly reach households.",
+            "2. Undistributed profits, corporate tax and net interest payments by households are deducted.",
+            "3. Transfer payments received by households from government and firms are added.",
+          ],
+          order: 5,
+        },
+        {
+          subsection_name: "Personal Disposable Income",
+          subsection_content: [
+            "1. Personal Disposable Income is Personal Income minus personal tax payments and non-tax payments.",
+            "2. It is the income households can finally use for consumption or saving.",
+          ],
+          order: 6,
+        },
+        {
+          subsection_name: "National Disposable Income and Private Income",
+          subsection_content: [
+            "1. National Disposable Income shows the maximum amount of goods and services available to the domestic economy.",
+            "2. Private Income includes income accruing to the private sector along with transfers and relevant income flows.",
+            "3. These measures are also used in national income accounting in India.",
+          ],
+          order: 7,
+        },
+      ],
     },
     {
       order: 4,
-      sectionName: "2.4 NOMINAL AND REAL GDP",
+      sectionName: "Nominal and real gdp",
       explanation: [
         "1. Nominal GDP measures output at current prices, so it can rise because of higher prices even when production does not rise.",
         "2. Real GDP measures output at constant prices, so it reflects changes in the actual volume of production.",
@@ -125,7 +187,7 @@ const chapterConfig = {
     },
     {
       order: 5,
-      sectionName: "2.5 GDP AND WELFARE",
+      sectionName: "Gdp and welfare",
       explanation: [
         "1. A higher GDP does not always mean higher welfare for all people in a country.",
         "2. If the increase in GDP is concentrated in a few hands, most people may not become better off.",

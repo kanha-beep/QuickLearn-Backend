@@ -826,6 +826,11 @@ const toKeywords = (explanation = []) =>
     .map((item) => String(item).replace(/^\d+\.\s*/, "").trim())
     .filter(Boolean);
 
+const stripLeadingRomanNumeral = (value = "") =>
+  String(value)
+    .replace(/^\(?[ivxlcdm]+\)?[.):\-\s]+/i, "")
+    .trim();
+
 const syncChapter = async ({ order, chapterName, rows }) => {
   let chapter = await Chapters.findOne({
     subject_of_chapter: subjectId,
@@ -862,8 +867,15 @@ const syncChapter = async ({ order, chapterName, rows }) => {
     rows.map((row) => ({
       section_name: row.sectionName,
       section_content: row.explanation,
-      keywords: Array.isArray(row.keywords) ? row.keywords : toKeywords(row.explanation),
-      subsections: Array.isArray(row.subsections) ? row.subsections : [],
+      keywords: Array.isArray(row.keywords)
+        ? row.keywords.map((keyword) => stripLeadingRomanNumeral(keyword))
+        : toKeywords(row.explanation).map((keyword) => stripLeadingRomanNumeral(keyword)),
+      subsections: Array.isArray(row.subsections)
+        ? row.subsections.map((subsection) => ({
+            ...subsection,
+            subsection_name: stripLeadingRomanNumeral(subsection?.subsection_name || ""),
+          }))
+        : [],
       order: row.order,
       chapter_of_section: chapter._id,
       subject_of_section: subjectId,
