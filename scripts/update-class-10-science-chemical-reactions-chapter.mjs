@@ -95,15 +95,25 @@ const chapter = {
         "Chip packets are flushed with nitrogen to prevent oxidation of fats and oils.",
       ], 2),
     ], 3),
+    section("What you have learnt", [
+      "A complete chemical equation symbolically represents reactants, products, and their physical states.",
+      "Chemical equations must be balanced so every element has the same number of atoms on the reactant and product sides.",
+      "A combination reaction forms one new substance from two or more substances, while a decomposition reaction breaks one substance into two or more substances.",
+      "Exothermic reactions release heat along with products, whereas endothermic reactions absorb energy.",
+      "In displacement reactions, one element replaces another from its compound; double displacement reactions exchange ions between reactants.",
+      "Precipitation reactions produce insoluble salts.",
+      "Oxidation is gain of oxygen or loss of hydrogen; reduction is loss of oxygen or gain of hydrogen.",
+    ], [], 4),
   ],
 };
 
 function validate(data) {
-  assert.equal(data.sections.length, 3, "Expected exactly three main section buttons");
+  assert.equal(data.sections.length, 4, "Expected three chapter sections plus What you have learnt");
   data.sections.forEach((item, index) => {
     assert.equal(item.order, index + 1);
     assert.deepEqual(item.keywords, item.subsections.map((sub) => sub.subsection_name));
-    assert.equal(item.section_content.length, 0, "Sections with subsections use About for introductory content");
+    if (item.subsections.length) assert.equal(item.section_content.length, 0, "Sections with subsections use About for introductory content");
+    else assert(item.section_content.length > 0, "Explanation-only sections need content");
     item.subsections.forEach((sub, subIndex) => {
       assert.equal(sub.order, subIndex + 1);
       assert(sub.subsection_content.every((line, pointIndex) => line.startsWith(`${pointIndex + 1}. `)));
